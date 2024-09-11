@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="{{ asset('front/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/bootstrap-datepicker.min.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/animate.min.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/magnific-popup.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/select2-bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/all.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/meanmenu.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/spacing.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/style.css') }}">

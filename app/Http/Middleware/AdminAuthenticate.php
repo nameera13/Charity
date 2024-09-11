@@ -17,7 +17,7 @@ class AdminAuthenticate
     public function handle(Request $request, Closure $next): Response
     {
         if(!Auth::guard('admin')->check()){
-            return redirect()->url('admin/login')->with('error','You do not have permission to access this page');
+            return redirect(url('admin/login'))->with('error','You do not have permission to access this page');
         }
         return $next($request);
     }

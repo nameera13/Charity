@@ -127,11 +127,11 @@ class AdminController extends Controller
             ]);    
 
             if (Auth::guard('admin')->user()->photo != null) {
-                unlink(public_path('uploads/profile/'.Auth::guard('admin')->user()->photo));
+                unlink(public_path('admin/uploads/profile/'.Auth::guard('admin')->user()->photo));
             }
 
             $final_name = time().'.'.$request->photo->extension();
-            $request->photo->move(public_path('uploads/profile'), $final_name);
+            $request->photo->move(public_path('admin/uploads/profile'), $final_name);
             $data->photo = $final_name;
 
         } 

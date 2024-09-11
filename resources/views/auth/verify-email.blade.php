@@ -1,31 +1,62 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-    </div>
+@extends('front.layout.default')
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-        </div>
-    @endif
+@section('front')
 
-    <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
-
-            <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
+<!-- Page Top Section -->
+<div class="page-top" style="background-image: url('{{ asset('front/uploads/banner.jpg') }}'); background-size: cover; background-position: center;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center text-white">
+                <h2 class="display-4">Verify Email</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a href="{{ url('/') }}" class="text-white">Home</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Verify Email</li>
+                    </ol>
+                </nav>
             </div>
-        </form>
-
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ __('Log Out') }}
-            </button>
-        </form>
+        </div>
     </div>
-</x-guest-layout>
+</div>
+
+<!-- Page Content Section -->
+<div class="page-content pt-5 pb-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <!-- Content Container -->
+                <div class="border rounded-3 p-4 shadow-sm bg-light">
+                    <!-- Message Display -->
+                    <div class="alert alert-info mb-4">
+                        Thanks for signing up! Please verify your email by clicking the link we sent. If you didn’t receive it, you can request another one.
+                    </div>
+
+                    @if (session('status') == 'verification-link-sent')
+                        <div class="text-success mb-4">
+                            A new verification link has been sent to your email.
+                        </div>
+                    @endif
+
+                    <!-- Action Forms -->
+                    <div class="d-flex justify-content-between">
+                        <form method="POST" action="{{ route('verification.send') }}" class="me-2">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">
+                                Resend Verification Email
+                            </button>
+                        </form>
+                        
+                        <form method="POST" action="{{ route('logout') }}" class="ms-2">
+                            @csrf
+                            <button type="submit" class="btn btn-secondary">
+                                Logout
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection

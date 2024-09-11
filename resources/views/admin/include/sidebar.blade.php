@@ -10,6 +10,13 @@
         <ul class="sidebar-menu">
 
             <li class="{{ Request::is('admin/dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/dashboard') }}"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
+            <li class="{{ Request::is('admin/slider') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/slider') }}"><i class="fas fa-hand-point-right"></i> <span>Slider</span></a></li>
+            <li class="{{ Request::is('admin/special') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/special') }}"><i class="fas fa-hand-point-right"></i> <span>Special</span></a></li>
+            <li class="{{ Request::is('admin/feature') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/feature') }}"><i class="fas fa-hand-point-right"></i> <span>Feature</span></a></li>
+            <li class="{{ Request::is('admin/testimonial') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/testimonial') }}"><i class="fas fa-hand-point-right"></i> <span>Testimonial</span></a></li>
+            <li class="{{ Request::is('admin/counter') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/counter') }}"><i class="fas fa-hand-point-right"></i> <span>Counter</span></a></li>
+            <li class="{{ Request::is('admin/faqs') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/faqs') }}"><i class="fas fa-hand-point-right"></i> <span>FAQs</span></a></li>
+            <li class="{{ Request::is('admin/volunteer') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/volunteer') }}"><i class="fas fa-hand-point-right"></i> <span>Volunteer</span></a></li>
 
             {{-- <li class="nav-item dropdown active">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Dropdown Items</span></a>
