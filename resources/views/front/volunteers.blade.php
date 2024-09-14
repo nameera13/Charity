@@ -28,7 +28,7 @@
                             <img src="{{ asset('admin/uploads/volunteers/'.$value->photo) }}" alt="" />
                         </div>
                         <div class="text">
-                            <h2><a href="volunteer.html">{{ $value->name }}</a></h2>
+                            <h2><a href="{{ url('volunteers/'.$value->id) }}">{{ $value->name }}</a></h2>
                             <div class="designation">{{ $value->profession }}</div>
                             <div class="social">
                                 <ul>

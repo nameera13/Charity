@@ -66,15 +66,15 @@
                                 Gallery
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="galleryDropdown">
-                                <li><a class="dropdown-item" href="photo-gallery.html">Photo Gallery</a></li>
-                                <li><a class="dropdown-item" href="video-gallery.html">Video Gallery</a></li>
+                                <li><a class="dropdown-item" href="{{ url('photo-gallery') }}">Photo Gallery</a></li>
+                                <li><a class="dropdown-item" href="{{ url('video-gallery') }}">Video Gallery</a></li>
                             </ul>
                         </li>
                         <li class="nav-item {{ Request::is('faqs') ? 'active' : '' }}">
                             <a href="{{ url('faqs') }}" class="nav-link">FAQ</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="blog.html" class="nav-link">Blog</a>
+                        <li class="nav-item {{ Request::is('blog') ? 'active' : '' }}">
+                            <a href="{{ url('blog') }}" class="nav-link">Blog</a>
                         </li>
                         <li class="nav-item">
                             <a href="contact.html" class="nav-link">Contact</a>

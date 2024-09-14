@@ -8,6 +8,10 @@ use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\Front\AboutController;
 use App\Http\Controllers\Front\FAQController;
 use App\Http\Controllers\Front\VolunteerController;
+use App\Http\Controllers\Front\PhotoGalleryController;
+use App\Http\Controllers\Front\VideoGalleryController;
+use App\Http\Controllers\Front\BlogController;
+
 
 // Admin
 use App\Http\Controllers\Admin\AdminController;
@@ -18,6 +22,13 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\FAQsController;
 use App\Http\Controllers\Admin\AdminVolunteerController;
+use App\Http\Controllers\Admin\PhotoCategoryController;
+use App\Http\Controllers\Admin\PhotoController;
+use App\Http\Controllers\Admin\VideoCategoryController;
+use App\Http\Controllers\Admin\VideoController;
+use App\Http\Controllers\Admin\PostCategoryController;
+use App\Http\Controllers\Admin\PostController;
+
 
 
 
@@ -40,6 +51,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index']);
 Route::get('/faqs', [FAQController::class, 'index']);
 Route::get('/volunteers', [VolunteerController::class, 'index']);
+Route::get('/volunteers/{id}', [VolunteerController::class, 'details']);
+Route::get('/photo-gallery', [PhotoGalleryController::class, 'index']);
+Route::get('/video-gallery', [VideoGalleryController::class, 'index']);
+Route::get('/blog', [BlogController::class, 'index']);
+Route::get('blog/{slug}', [BlogController::class, 'detail']);
+Route::get('category/{slug}', [BlogController::class, 'category']);
+Route::get('tag/{name}', [BlogController::class, 'tag']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -96,6 +114,31 @@ Route::middleware('admin')->prefix('admin')->group(function(){
     /*-- Volunteer --*/
     Route::resource('volunteer',AdminVolunteerController::class);
     Route::get('volunteer-datatable', [AdminVolunteerController::class, 'getDataTable']);
+
+    /*-- Photo Category --*/
+    Route::resource('photo-category',PhotoCategoryController::class);
+    Route::get('photo-category-datatable', [PhotoCategoryController::class, 'getDataTable']);
+    
+    /*-- Photo --*/
+    Route::resource('photo',PhotoController::class);
+    Route::get('photo-datatable', [PhotoController::class, 'getDataTable']);
+
+    /*-- Video Category --*/
+    Route::resource('video-category',VideoCategoryController::class);
+    Route::get('video-category-datatable', [VideoCategoryController::class, 'getDataTable']);
+    
+    /*-- Video --*/
+    Route::resource('video',VideoController::class);
+    Route::get('video-datatable', [VideoController::class, 'getDataTable']);
+    
+    /*-- Post Category --*/
+    Route::resource('post-category',PostCategoryController::class);
+    Route::get('post-category-datatable', [PostCategoryController::class, 'getDataTable']);
+
+    /*-- Post --*/
+    Route::resource('post',PostController::class);
+    Route::get('post-datatable', [PostController::class, 'getDataTable']);
+    
     
 });
 

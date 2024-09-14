@@ -324,6 +324,13 @@
             $(".select2").select2();
         }
 
+        if(jQuery().select2) {
+            $(".select2_tags").select2({
+                tags: true,
+                multiple: true,
+            });
+        }
+
         if(jQuery().selectric) {
             $(".selectric").selectric({
                 disableOnMobile: false,

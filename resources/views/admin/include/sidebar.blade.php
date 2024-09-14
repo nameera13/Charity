@@ -18,15 +18,31 @@
             <li class="{{ Request::is('admin/faqs') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/faqs') }}"><i class="fas fa-hand-point-right"></i> <span>FAQs</span></a></li>
             <li class="{{ Request::is('admin/volunteer') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/volunteer') }}"><i class="fas fa-hand-point-right"></i> <span>Volunteer</span></a></li>
 
-            {{-- <li class="nav-item dropdown active">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Dropdown Items</span></a>
+            <li class="nav-item dropdown {{ Request::is('admin/photo-category') || Request::is('admin/photo') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Photo Gallery</span></a>
                 <ul class="dropdown-menu">
-                    <li class="active"><a class="nav-link" href=""><i class="fas fa-angle-right"></i> Item 1</a></li>
-                    <li class=""><a class="nav-link" href=""><i class="fas fa-angle-right"></i> Item 2</a></li>
+                    <li class="{{ Request::is('admin/photo-category') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/photo-category') }}"><i class="fas fa-angle-right"></i>Categories</a></li>
+                    <li class="{{ Request::is('admin/photo') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/photo') }}"><i class="fas fa-angle-right"></i>Photos</a></li>
                 </ul>
             </li>
 
-            <li class=""><a class="nav-link" href="setting.html"><i class="fas fa-hand-point-right"></i> <span>Setting</span></a></li>
+            <li class="nav-item dropdown {{ Request::is('admin/video-category') || Request::is('admin/video') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Video Gallery</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/video-category') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/video-category') }}"><i class="fas fa-angle-right"></i>Categories</a></li>
+                    <li class="{{ Request::is('admin/video') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/video') }}"><i class="fas fa-angle-right"></i>Videos</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown {{ Request::is('admin/post-category') || Request::is('admin/post') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Blog Section</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/post-category') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/post-category') }}"><i class="fas fa-angle-right"></i>Categories</a></li>
+                    <li class="{{ Request::is('admin/post') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/post') }}"><i class="fas fa-angle-right"></i>Posts</a></li>
+                </ul>
+            </li>
+
+            {{-- <li class=""><a class="nav-link" href="setting.html"><i class="fas fa-hand-point-right"></i> <span>Setting</span></a></li>
 
             <li class=""><a class="nav-link" href="form.html"><i class="fas fa-hand-point-right"></i> <span>Form</span></a></li>
 

@@ -14,8 +14,9 @@ class VolunteerController extends Controller
         return view('front.volunteers',compact('volunteers'));
     }
 
-    public function details()
+    public function details($id)
     {
-        return view('front.volunteer_details');
+        $volunteer_details = Volunteer::where('id', $id)->first();        
+        return view('front.volunteer_details',compact('volunteer_details'));
     }
 }

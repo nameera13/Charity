@@ -106,6 +106,6 @@ class SliderController extends Controller
         unlink(public_path('admin/uploads/sliders/'.$result->photo));
         $result->delete();
 
-        return redirect()->back()->with('Slider Deleted Successfully!');
+        return redirect()->back()->with('success','Slider Deleted Successfully!');
     }
 }

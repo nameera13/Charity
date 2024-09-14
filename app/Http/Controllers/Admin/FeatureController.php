@@ -91,7 +91,7 @@ class FeatureController extends Controller
         $result = $this->model->find($id);
         $result->delete();
 
-        return redirect()->back()->with('Feature Deleted Successfully!');
+        return redirect()->back()->with('success','Feature Deleted Successfully!');
     }
 
     public function featureSectionItem(Request $request)

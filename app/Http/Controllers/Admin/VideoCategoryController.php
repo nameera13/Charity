@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\FAQ;
+use App\Models\VideoCategory;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\View;
 
-class FAQsController extends Controller
+class VideoCategoryController extends Controller
 {
     
-    public function __construct(FAQ $model)
+    public function __construct(VideoCategory $model)
     {
-        $this->moduleName = "FAQs";
+        $this->moduleName = "Video Category";
         $this->model = $model;
-        $this->moduleRoute = url('admin/faqs');
-        $this->moduleView = "admin.main.faq";
+        $this->moduleRoute = url('admin/video-category');
+        $this->moduleView = "admin.main.video_category";
 
         View::share('module_name', $this->moduleName);
         View::share('module_route', $this->moduleRoute);
@@ -26,15 +26,15 @@ class FAQsController extends Controller
 
     public function index()
     {
-        $faqs = FAQ::get();
-        return view('admin.main.faq.index',compact('faqs'));
+        $video_category = VideoCategory::get();
+        return view('admin.main.video_category.index',compact('video_category'));
     }
 
     public function getDataTable(Request $request)
     {
-        $result = $this->model->select(['id', 'question', 'created_at']);
+        $result = $this->model->select(['id', 'name', 'created_at']);
 
-        $result = $result->orderBy("faqs.created_at", "DESC");
+        $result = $result->orderBy("video_categories.created_at", "DESC");
 
         return DataTables::of($result)
         ->editColumn('created_at', function ($result) {
@@ -49,12 +49,11 @@ class FAQsController extends Controller
 
     public function store(Request $request)
     {
-        $data = new FAQ();
-        $data->question = $request->question;
-        $data->answer = $request->answer;
+        $data = new VideoCategory();
+        $data->name = $request->name;
         $data->save();
 
-        return redirect($this->moduleRoute)->with('success','FAQ Created Successfully!');
+        return redirect($this->moduleRoute)->with('success','Video Category Created Successfully!');
     }
 
     public function show($id)
@@ -75,11 +74,10 @@ class FAQsController extends Controller
     {
         $result = $this->model->find($id);
 
-        $result->question = $request->question;
-        $result->answer = $request->answer;
+        $result->name = $request->name;
         $result->update();
         
-        return redirect($this->moduleRoute)->with('success','FAQ Updated Successfully!');
+        return redirect($this->moduleRoute)->with('success','Video Category Updated Successfully!');
     }
 
     public function destroy($id)
@@ -87,7 +85,7 @@ class FAQsController extends Controller
         $result = $this->model->find($id);
         $result->delete();
 
-        return redirect()->back()->with('success','FAQ Deleted Successfully!');
+        return redirect()->back()->with('success','Video Category Deleted Successfully!');
     }
 
 }

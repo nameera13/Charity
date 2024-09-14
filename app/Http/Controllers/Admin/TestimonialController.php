@@ -106,7 +106,7 @@ class TestimonialController extends Controller
         unlink(public_path('admin/uploads/testimonials/'.$result->photo));
         $result->delete();
 
-        return redirect()->back()->with('Testimonials Deleted Successfully!');
+        return redirect()->back()->with('success','Testimonials Deleted Successfully!');
     }
 
     public function testimonialSectionItem(Request $request)

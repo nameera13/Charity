@@ -121,7 +121,7 @@ class AdminVolunteerController extends Controller
         unlink(public_path('admin/uploads/volunteers/'.$result->photo));
         $result->delete();
 
-        return redirect()->back()->with('Volunteer Deleted Successfully!');
+        return redirect()->back()->with('success','Volunteer Deleted Successfully!');
     }
 
 
