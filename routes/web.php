@@ -28,6 +28,8 @@ use App\Http\Controllers\Admin\VideoCategoryController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\ReplyController;
 
 
 
@@ -58,6 +60,8 @@ Route::get('/blog', [BlogController::class, 'index']);
 Route::get('blog/{slug}', [BlogController::class, 'detail']);
 Route::get('category/{slug}', [BlogController::class, 'category']);
 Route::get('tag/{name}', [BlogController::class, 'tag']);
+Route::post('comment', [BlogController::class, 'comment']);
+Route::post('reply', [BlogController::class, 'reply']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -138,8 +142,18 @@ Route::middleware('admin')->prefix('admin')->group(function(){
     /*-- Post --*/
     Route::resource('post',PostController::class);
     Route::get('post-datatable', [PostController::class, 'getDataTable']);
-    
-    
+    Route::post('post/check-title-unique', [PostController::class, 'checkIsTitleUnique']);
+
+    /*-- Comments --*/
+    Route::resource('comments',CommentController::class);
+    Route::get('comments-datatable', [CommentController::class, 'getDataTable']);
+    Route::get('comments-change-status/{id}', [CommentController::class, 'changeStatus']);
+
+    /*-- Replies --*/
+    Route::resource('replies',ReplyController::class);
+    Route::get('replies-datatable', [ReplyController::class, 'getDataTable']);
+    Route::get('replies-change-status/{id}', [ReplyController::class, 'changeStatus']);
+
 });
 
 Route::prefix('admin')->group(function(){

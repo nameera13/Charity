@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\Comment;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\View;
 
@@ -17,10 +18,13 @@ class PostController extends Controller
         $this->moduleName = "Posts";
         $this->model = $model;
         $this->moduleRoute = url('admin/post');
+        $this->moduleRouteComment = url('admin/comments');
+
         $this->moduleView = "admin.main.post";
 
         View::share('module_name', $this->moduleName);
         View::share('module_route', $this->moduleRoute);
+        View::share('module_route_comment', $this->moduleRouteComment);
         View::share('module_view', $this->moduleView);
 
     }
@@ -134,6 +138,38 @@ class PostController extends Controller
         $result->delete();
 
         return redirect()->back()->with('success','Post Deleted Successfully!');
+    }
+
+    public function checkIsTitleUnique(Request $request)
+    {
+        $exists = Post::where('title', $request->title)->exists(); 
+        return response()->json(['exists' => $exists]);
+    }
+
+    public function comments()
+    {
+        $comments = Comment::get();
+        return view('admin.main.post.comment',compact('comments'));
+    }
+
+    public function commentsDataTable(Request $request)
+    {
+        $result = Comment::select('*');
+
+        $result = $result->orderBy("comments.created_at", "DESC");
+
+        return DataTables::of($result)
+            ->editColumn('status', function ($result) {
+                if ($result->status == 'active') {
+                    return '<span class="badge badge-success">Active</span>';
+                } elseif ($result->status == 'Pending') {
+                    return '<span class="badge badge-info">Pending</span>';
+                } else {
+                    return '<span class="badge badge-secondary">Unknown</span>';
+                }
+            })->editColumn('created_at', function ($result) {
+                return date("d-m-Y h:i A", strtotime($result->created_at));
+            })->escapeColumns([])->addIndexColumn()->make(true);
     }
 
 }

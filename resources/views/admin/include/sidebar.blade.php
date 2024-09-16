@@ -34,11 +34,13 @@
                 </ul>
             </li>
 
-            <li class="nav-item dropdown {{ Request::is('admin/post-category') || Request::is('admin/post') ? 'active' : '' }}">
+            <li class="nav-item dropdown {{ Request::is('admin/post-category') || Request::is('admin/post') || Request::is('admin/comments') || Request::is('admin/replies') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Blog Section</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ Request::is('admin/post-category') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/post-category') }}"><i class="fas fa-angle-right"></i>Categories</a></li>
                     <li class="{{ Request::is('admin/post') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/post') }}"><i class="fas fa-angle-right"></i>Posts</a></li>
+                    <li class="{{ Request::is('admin/comments') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/comments') }}"><i class="fas fa-angle-right"></i>Comments</a></li>
+                    <li class="{{ Request::is('admin/replies') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/replies') }}"><i class="fas fa-angle-right"></i>Replies</a></li>
                 </ul>
             </li>
 

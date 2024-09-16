@@ -111,9 +111,26 @@
         $('#title').on('input', function() {
             var titleValue = $(this).val();
             
-            var slugValue = titleValue.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') .replace(/--+/g, '-');    
-
-            $('#slug').val(slugValue);  
+            var slugValue = titleValue.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/--+/g, '-');    
+            $('#slug').val(slugValue);
+            
+            $.ajax({
+                url: "{{ url('admin/post/check-title-unique') }}", 
+                method: 'POST',
+                data: {
+                    title: titleValue,
+                    _token: '{{ csrf_token() }}' 
+                },
+                success: function(response) {
+                    if (response.exists) {
+                        $('#title').addClass('is-invalid'); 
+                        $('.error_title').text('This title is already in use.').show(); 
+                    } else {
+                        $('#title').removeClass('is-invalid');
+                        $('.error_title').text('').hide();
+                    }
+                }
+            });
         });
 
         $("#form_validate").validate({
@@ -132,7 +149,6 @@
                 },
                 photo: {
                     required: function(element) {
-                        // Only required if a new file is selected
                         return $("#photo")[0].files.length > 0 || !$("#photo").data('existing-photo');
                     },
                     accept: "image/jpg, image/jpeg, image/png"
