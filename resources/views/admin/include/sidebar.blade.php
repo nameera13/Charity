@@ -44,6 +44,9 @@
                 </ul>
             </li>
 
+            <li class="{{ Request::is('admin/event') ? 'active' : '' }}"><a class="nav-link" href="{{ url('admin/event') }}"><i class="fas fa-hand-point-right"></i> <span>Event</span></a></li>
+
+
             {{-- <li class=""><a class="nav-link" href="setting.html"><i class="fas fa-hand-point-right"></i> <span>Setting</span></a></li>
 
             <li class=""><a class="nav-link" href="form.html"><i class="fas fa-hand-point-right"></i> <span>Form</span></a></li>

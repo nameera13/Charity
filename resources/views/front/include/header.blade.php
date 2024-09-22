@@ -52,8 +52,8 @@
                         <li class="nav-item {{ Request::is('about') ? 'active' : '' }}">
                             <a href="{{ url('/about') }}" class="nav-link">About</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="events.html" class="nav-link">Events</a>
+                        <li class="nav-item {{ Request::is('events') ? 'active' : '' }}">
+                            <a href="{{ url('/events') }}" class="nav-link">Events</a>
                         </li>
                         <li class="nav-item">
                             <a href="causes.html" class="nav-link">Causes</a>

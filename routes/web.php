@@ -11,6 +11,7 @@ use App\Http\Controllers\Front\VolunteerController;
 use App\Http\Controllers\Front\PhotoGalleryController;
 use App\Http\Controllers\Front\VideoGalleryController;
 use App\Http\Controllers\Front\BlogController;
+use App\Http\Controllers\Front\EventsController;
 
 
 // Admin
@@ -30,6 +31,9 @@ use App\Http\Controllers\Admin\PostCategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ReplyController;
+use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\EventPhotoController;
+use App\Http\Controllers\Admin\EventVideoController;
 
 
 
@@ -62,6 +66,9 @@ Route::get('category/{slug}', [BlogController::class, 'category']);
 Route::get('tag/{name}', [BlogController::class, 'tag']);
 Route::post('comment', [BlogController::class, 'comment']);
 Route::post('reply', [BlogController::class, 'reply']);
+Route::get('events', [EventsController::class, 'index']);
+Route::get('events/{slug}', [EventsController::class, 'details']);
+Route::post('events/enquery', [EventsController::class, 'enquery']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -153,6 +160,24 @@ Route::middleware('admin')->prefix('admin')->group(function(){
     Route::resource('replies',ReplyController::class);
     Route::get('replies-datatable', [ReplyController::class, 'getDataTable']);
     Route::get('replies-change-status/{id}', [ReplyController::class, 'changeStatus']);
+
+    /*-- Event --*/
+    Route::resource('event',EventController::class);
+    Route::get('event-datatable', [EventController::class, 'getDataTable']);
+    Route::post('event/check-name-unique', [EventController::class, 'checkIsEventNameUnique']);
+
+    /*-- Event Photo --*/
+    Route::get('event/photo/{id}', [EventPhotoController::class, 'photo']);
+    Route::get('event-photo-datatable', [EventPhotoController::class, 'getDataTable']);
+    Route::post('event-photo', [EventPhotoController::class, 'store']);
+    Route::delete('event-photo/{id}', [EventPhotoController::class, 'destroy']);
+
+    /*-- Event Video --*/
+    Route::get('event/video/{id}', [EventVideoController::class, 'video']);
+    Route::get('event-video-datatable', [EventVideoController::class, 'getDataTable']);
+    Route::post('event-video', [EventVideoController::class, 'store']);
+    Route::delete('event-video/{id}', [EventVideoController::class, 'destroy']);
+
 
 });
 
