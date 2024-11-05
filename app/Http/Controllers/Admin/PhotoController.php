@@ -62,7 +62,7 @@ class PhotoController extends Controller
         $data = new Photo();
         $data->photo_category_id = $request->photo_category_id;
         $fileName = time().'.'.$request->photo->extension();
-        $request->photo->move(public_path('admin/uploads/photos'),$fileName);
+        $request->photo->move(public_path('uploads/photos'),$fileName);
         $data->photo = $fileName;
         $data->save();
 
@@ -89,9 +89,9 @@ class PhotoController extends Controller
         $result = $this->model->find($id);
 
         if($request->photo != null){
-            unlink(public_path('admin/uploads/photos/'.$result->photo));
+            unlink(public_path('uploads/photos/'.$result->photo));
             $fileName = time().'.'.$request->photo->extension();
-            $request->photo->move(public_path('admin/uploads/photos'),$fileName);
+            $request->photo->move(public_path('uploads/photos'),$fileName);
             $result->photo = $fileName;
 
         }
@@ -105,7 +105,7 @@ class PhotoController extends Controller
     public function destroy($id)
     {
         $result = $this->model->find($id);
-        unlink(public_path('admin/uploads/photos/'.$result->photo));
+        unlink(public_path('uploads/photos/'.$result->photo));
         $result->delete();
 
         return redirect()->back()->with('success','Photo Deleted Successfully!');

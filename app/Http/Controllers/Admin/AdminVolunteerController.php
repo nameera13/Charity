@@ -66,7 +66,7 @@ class AdminVolunteerController extends Controller
         $data->instagram = $request->instagram;
         $data->detail = $request->detail;
         $fileName = time().'.'.$request->photo->extension();
-        $request->photo->move(public_path('admin/uploads/volunteers'),$fileName);
+        $request->photo->move(public_path('uploads/volunteers'),$fileName);
         $data->photo = $fileName;
         $data->save();
 
@@ -92,9 +92,9 @@ class AdminVolunteerController extends Controller
         $result = $this->model->find($id);
 
         if($request->photo != null){
-            unlink(public_path('admin/uploads/volunteers/'.$result->photo));
+            unlink(public_path('uploads/volunteers/'.$result->photo));
             $fileName = time().'.'.$request->photo->extension();
-            $request->photo->move(public_path('admin/uploads/volunteers'),$fileName);
+            $request->photo->move(public_path('uploads/volunteers'),$fileName);
             $result->photo = $fileName;
 
         }
@@ -118,7 +118,7 @@ class AdminVolunteerController extends Controller
     public function destroy($id)
     {
         $result = $this->model->find($id);
-        unlink(public_path('admin/uploads/volunteers/'.$result->photo));
+        unlink(public_path('uploads/volunteers/'.$result->photo));
         $result->delete();
 
         return redirect()->back()->with('success','Volunteer Deleted Successfully!');

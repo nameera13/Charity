@@ -26,7 +26,7 @@
                             <div class="form-group mb-3">
                                 <label for="">Existing Photo</label>
                                 <div class="">
-                                    <img src="{{ asset('admin/uploads/testimonial-item/'.$testimonial_section_items->photo) }}" alt="" style="width:100%;" class="w_200">
+                                    <img src="{{ asset('uploads/testimonial-item/'.$testimonial_section_items->photo) }}" alt="" style="width:100%;" class="w_200">
                                 </div>
                             </div>
                             <div class="form-group mb-3">
@@ -111,7 +111,7 @@
                         searchable: false,
                         render: function(data, type, row) {
 
-                            var photoUrl = data ? "{{ asset('admin/uploads/testimonials') }}/" + data : "{{ asset('admin/uploads/no-img.png') }}";
+                            var photoUrl = data ? "{{ asset('uploads/testimonials') }}/" + data : "{{ asset('uploads/no-img.png') }}";
                             return '<img src="' + photoUrl + '" alt="Photo" width="100" />';
                         }
                     },

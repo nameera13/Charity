@@ -8,10 +8,14 @@ use App\Models\User;
 use App\Models\Slider;
 use App\Models\Special;
 use App\Models\Feature;
-use App\Models\FeatureSectionItem;
 use App\Models\Testimonial;
-use App\Models\TestimonialSectionItem;
-
+use App\Models\EventTicket;
+use App\Models\CauseDonation;
+use App\Models\HomePageItem;
+use App\Models\Cause;
+use App\Models\Event;
+use App\Models\Post;
+use App\Models\PagePolicy;
 
 class HomeController extends Controller
 {
@@ -20,17 +24,43 @@ class HomeController extends Controller
         $sliders = Slider::get();
         $special = Special::where('id', 1)->first();
         $features = Feature::get();
-        $feature_section_items = FeatureSectionItem::where('id', 1)->first();
         $testimonials = Testimonial::get();
-        $testimonial_section_items = TestimonialSectionItem::where('id', 1)->first();
-
-        return view('front.home',compact('sliders', 'special', 'features', 'feature_section_items', 'testimonials', 'testimonial_section_items'));
+        $home_page_item = HomePageItem::where('id', 1)->first();
+        $featured_causes = Cause::where('is_featured','Yes')->get();
+        $events = Event::get();
+        $posts = Post::orderBy('id','desc')->take(3)->get();
+        
+        return view('front.home',compact('sliders', 'special', 'features', 'testimonials', 'home_page_item', 'featured_causes', 'events', 'posts'));
     }
 
     public function dashboard()
     {
-        $users = User::get();
-        return view('front.dashboard',compact('users'));
+        $total_ticket = 0;
+        $total_price = 0;
+        $event_ticket = EventTicket::where('user_id', auth()->user()->id)->get();
+        foreach ($event_ticket as $value) {
+            $total_ticket += $value->number_of_tickets;
+            $total_price += $value->total_price;
+        }
+
+        $total_donation_price = 0;
+        $donation_data = CauseDonation::where('user_id', auth()->user()->id)->get();
+        foreach ($donation_data as $value) {
+            $total_donation_price += $value->price;
+        }
+        return view('front.dashboard',compact('total_ticket', 'total_price', 'total_donation_price'));
+    }
+
+    public function terms_conditions()
+    {
+        $terms = PagePolicy::where('id',1)->first();
+        return view('front.terms_condition', compact('terms'));
+    }
+
+    public function privacy_policy()
+    {
+        $privacy = PagePolicy::where('id',1)->first();
+        return view('front.privacy_policy', compact('privacy'));        
     }
 
 }

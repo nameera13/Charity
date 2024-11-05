@@ -16,10 +16,10 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     @if (Auth::guard('admin')->user()->photo != null)                                        
-                                        <img src="{{ asset('admin/uploads/profile/'.Auth::guard('admin')->user()->photo) }}"
+                                        <img src="{{ asset('uploads/profile/'.Auth::guard('admin')->user()->photo) }}"
                                          alt="" class="profile-photo w_100_p">
                                     @else                                        
-                                        <img src="{{ asset('admin/uploads/no-img.png') }}" alt="" class="profile-photo w_100_p">
+                                        <img src="{{ asset('uploads/no-img.png') }}" alt="" class="profile-photo w_100_p">
                                     @endif
 
                                     <input type="file" class="mt_10" name="photo">

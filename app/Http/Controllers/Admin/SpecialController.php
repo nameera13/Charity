@@ -45,12 +45,12 @@ class SpecialController extends Controller
                 'photo' => 'image|mimes:jpg,jpeg,png|max:2048', 
             ]);
     
-            if (!empty($result->photo) && file_exists(public_path('admin/uploads/specials/'.$result->photo))) {
-                unlink(public_path('admin/uploads/specials/'.$result->photo));
+            if (!empty($result->photo) && file_exists(public_path('uploads/specials/'.$result->photo))) {
+                unlink(public_path('uploads/specials/'.$result->photo));
             }
     
             $final_name = time().'.'.$request->photo->extension();
-            $request->photo->move(public_path('admin/uploads/specials'), $final_name);
+            $request->photo->move(public_path('uploads/specials'), $final_name);
             $result->photo = $final_name; 
         }    
 

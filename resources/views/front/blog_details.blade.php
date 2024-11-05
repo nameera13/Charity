@@ -1,7 +1,7 @@
 @extends('front.layout.default')
 @section('title','Blog Details')
 @section('front')
-<div class="page-top" style="background-image: url('{{ asset('front/uploads/banner.jpg') }}')">
+<div class="page-top" style="background-image: url('{{ asset('uploads/setting/'.$global_setting_data->banner) }}')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -24,7 +24,7 @@
             <div class="col-lg-8 col-md-12">
                 <div class="left-item">
                     <div class="main-photo">
-                        <img src="{{ asset('admin/uploads/posts/'.$post->photo) }}" alt="">
+                        <img src="{{ asset('uploads/posts/'.$post->photo) }}" alt="">
                     </div>
                     <div class="sub">
                         <ul>

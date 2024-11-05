@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('photo');
             $table->text('tags');
+            $table->integer('email_send');
             $table->timestamps();
         });
     }

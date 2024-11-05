@@ -87,7 +87,7 @@ class PostCategoryController extends Controller
     {
         $posts = Post::where('post_category_id', $id)->get();
         foreach($posts as $post){
-            unlink(public_path('admin/uploads/posts/'.$post->photo));
+            unlink(public_path('uploads/posts/'.$post->photo));
         }
 
         Post::where('post_category_id', $id)->delete();

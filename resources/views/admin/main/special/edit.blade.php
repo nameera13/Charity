@@ -74,7 +74,7 @@
                                         <label>Photo</label>
                                         <input type="file" class="form-control mb-2" name="photo" id="photo" onchange="specialImage()">
                             
-                                        <img id="special_photo" src="{{ isset($result) ? asset('admin/uploads/specials/'.$result->photo) : '' }}" alt="" class="img-fluid {{ isset($result->photo) ? '' : 'd-none' }}" style="width: 240px; height: 140px;">
+                                        <img id="special_photo" src="{{ isset($result) ? asset('uploads/specials/'.$result->photo) : '' }}" alt="" class="img-fluid {{ isset($result->photo) ? '' : 'd-none' }}" style="width: 240px; height: 140px;">
                             
                                         @error('photo')
                                             <span class="text-danger"> {{ $message }} </span>

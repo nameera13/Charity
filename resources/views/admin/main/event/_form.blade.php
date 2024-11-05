@@ -103,7 +103,7 @@
             <label>Photo</label>
             <input type="file" class="form-control mb-2" name="featured_photo" id="featured_photo" onchange="Image()">
 
-            <img id="photos" src="{{ isset($result) ? asset('admin/uploads/events/'.$result->featured_photo) : '' }}" alt="" class="img-fluid {{ isset($result->featured_photo) ? '' : 'd-none' }}" style="width: 240px; height: 140px;">
+            <img id="photos" src="{{ isset($result) ? asset('uploads/events/'.$result->featured_photo) : '' }}" alt="" class="img-fluid {{ isset($result->featured_photo) ? '' : 'd-none' }}" style="width: 240px; height: 140px;">
 
             <span class="text-danger">
                 <div class="error_photo"></div>
@@ -202,6 +202,7 @@
                 },
                 short_description: {
                     required: true,
+                    maxlength: 120
                 },
                 description: {
                     required: true,

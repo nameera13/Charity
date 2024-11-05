@@ -15,10 +15,10 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 @if (Auth::guard('admin')->user()->photo != null)                                        
-                    <img src="{{ asset('admin/uploads/profile/'.Auth::guard('admin')->user()->photo) }}"
+                    <img src="{{ asset('uploads/profile/'.Auth::guard('admin')->user()->photo) }}"
                         alt="" class="rounded-circle-custom">
                 @else                                        
-                    <img src="{{ asset('admin/uploads/no-img.png') }}" alt="" class="rounded-circle-custom">
+                    <img src="{{ asset('uploads/no-img.png') }}" alt="" class="rounded-circle-custom">
                 @endif
             </a>
             <ul class="dropdown-menu dropdown-menu-end">

@@ -3,8 +3,13 @@
         <div class="row">
             <div class="col-md-6 left-side">
                 <ul>
-                    <li class="phone-text"><i class="fas fa-phone"></i> 111-222-3333</li>
-                    <li class="email-text"><i class="fas fa-envelope"></i> contact@example.com</li>
+                    @if ($global_setting_data->top_phone != '')                        
+                    <li class="phone-text"><i class="fas fa-phone"></i> {{ $global_setting_data->top_phone }}</li>
+                    @endif
+
+                    @if ($global_setting_data->top_email != '')                        
+                    <li class="email-text"><i class="fas fa-envelope"></i> {{ $global_setting_data->top_email }}</li>
+                    @endif
                 </ul>
             </div>
             <div class="col-md-6 right-side">
@@ -33,7 +38,7 @@
     <!-- Menu For Mobile Device -->
     <div class="mobile-nav">
         <a href="/" class="logo">
-            <img src="{{ asset('front/uploads/logo.png') }}" alt="">
+            <img src="{{ asset('uploads/setting/'.$global_setting_data->logo) }}" alt="">
         </a>
     </div>
 
@@ -42,7 +47,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-md navbar-light">
                 <a class="navbar-brand" href="/">
-                    <img src="{{ asset('front/uploads/logo.png') }}" alt="">
+                    <img src="{{ asset('uploads/setting/'.$global_setting_data->logo) }}" alt="">
                 </a>
                 <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
@@ -55,8 +60,8 @@
                         <li class="nav-item {{ Request::is('events') ? 'active' : '' }}">
                             <a href="{{ url('/events') }}" class="nav-link">Events</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="causes.html" class="nav-link">Causes</a>
+                        <li class="nav-item {{ Request::is('causes') ? 'active' : '' }}">
+                            <a href="{{ url('/causes') }}" class="nav-link">Causes</a>
                         </li>
                         <li class="nav-item {{ Request::is('volunteers') ? 'active' : '' }}">
                             <a href="{{ url('/volunteers') }}" class="nav-link">Volunteers</a>
@@ -77,7 +82,7 @@
                             <a href="{{ url('blog') }}" class="nav-link">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a href="contact.html" class="nav-link">Contact</a>
+                            <a href="{{ url('contact-us') }}" class="nav-link">Contact</a>
                         </li>
                     </ul>
                 </div>

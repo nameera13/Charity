@@ -1,16 +1,16 @@
 @extends('front.layout.default')
 @section('title','Event Details')
 @section('front')
-<div class="page-top" style="background-image: url('{{ asset('front/uploads/banner.jpg') }}')">
+<div class="page-top" style="background-image: url('{{ asset('uploads/setting/'.$global_setting_data->banner) }}')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>{{ $event->title }}</h2>
+                <h2>{{ $event->name }}</h2>
                 <div class="breadcrumb-container">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ url('events') }}">Events</a></li>
-                        <li class="breadcrumb-item active">Abled child cancer</li>
+                        <li class="breadcrumb-item active">{{ $event->name }}</li>
                     </ol>
                 </div>
             </div>
@@ -25,7 +25,7 @@
             <div class="col-lg-8 col-md-12">
                 <div class="left-item">
                     <div class="main-photo">
-                        <img src="{{ asset('admin/uploads/events/'.$event->featured_photo) }}" alt="">
+                        <img src="{{ asset('uploads/events/'.$event->featured_photo) }}" alt="">
                     </div>
                     <h2>
                         Description
@@ -43,8 +43,8 @@
                             @foreach ($event_photos as $value)                                
                                 <div class="col-md-6 col-lg-4">
                                     <div class="item">
-                                        <a href="{{ asset('admin/uploads/event-photo/'.$value->photo) }}" class="magnific">
-                                            <img src="{{ asset('admin/uploads/event-photo/'.$value->photo) }}" alt="" />
+                                        <a href="{{ asset('uploads/event-photo/'.$value->photo) }}" class="magnific">
+                                            <img src="{{ asset('uploads/event-photo/'.$value->photo) }}" alt="" />
                                             <div class="icon">
                                                 <i class="fas fa-plus"></i>
                                             </div>
@@ -157,6 +157,17 @@
                                             {{ $remaining }}
                                         </td>
                                     </tr>
+                                @else
+                                <tr>
+                                    <td><b>Booked</b></td>
+                                    <td>
+                                        @if ($event->booked_seat == '')
+                                            0
+                                        @else
+                                            {{ $event->booked_seat }}
+                                        @endif
+                                    </td>
+                                </tr>
                                 @endif
                             </table>
                         </div>
@@ -166,23 +177,28 @@
                         @if ($event->price != 0)                        
                             <h2 class="mt_30">Buy Ticket</h2>
                             <div class="pay-sec">
-                                <form action="" method="post">
+                                <form id="payment-form" method="POST">
                                     @csrf
-                                    <select name="number_of_tickets" class="form-select mb_15">
-                                        <option value="">How Many Tickets</option>
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                        <option value="">4</option>
-                                        <option value="">5</option>
-                                        <option value="">6</option>
-                                    </select>
-                                    <select name="payment_method" class="form-select mb_15">
-                                        <option value="">Select Payment Method</option>
-                                        <option value="">PayPal</option>
-                                        <option value="">Stripe</option>
-                                    </select>
-                                    <button type="submit" class="btn btn-primary w-100-p pay-now">Make Payment</button>
+                                    <input type="hidden" name="unit_price" value="{{ $event->price }}">
+                                    <input type="hidden" name="event_id" value="{{ $event->id }}">
+
+                                    <div class="form-group mb_15">                                       
+                                        <select name="number_of_tickets" class="form-select">
+                                            <option value="">How Many Tickets</option>
+                                            @for ($i = 1; $i <=5; $i++)                                           
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                        <span class="text-danger">
+                                            <div class="error_number_of_tickets"></div>
+                                        </span>
+                                    </div>
+                                    <div class="form-group mb_15">                                       
+                                        <select name="payment_method" class="form-select mb_15">
+                                            <option value="Razorpay">Razorpay</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" class="btn btn-primary w-100-p pay-now">Make Payment</button>
                                 </form>
                             </div>
                         @endif
@@ -190,18 +206,23 @@
                         @if ($event->price == 0)
                             <h2 class="mt_30">Free Booking</h2>
                             <div class="pay-sec">       
-                                <form action="" method="POST">
-                                    @csrf    
-                                    <select name="number_of_tickets" class="form-select mb_15">
-                                        <option value="">How Many Tickets</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                    </select>                 
-                                    <button type="submit" class="btn btn-primary w-100-p pay-now">Book Now</button>
+                                <form action="{{ url('events/ticket/free-booking') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="unit_price" value="{{ $event->price }}">
+                                    <input type="hidden" name="event_id" value="{{ $event->id }}">  
+                                    
+                                    <div class="form-group mb_15">
+                                        <select name="number_of_tickets" class="form-select">
+                                            <option value="">How Many Tickets</option>
+                                            @for ($i = 1; $i <=5; $i++)                                           
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>    
+                                        @error('number_of_tickets')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror  
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100-p">Book Now</button>
                                 </form>
                             </div>
                         @endif
@@ -266,3 +287,86 @@
 </div>
 
 @endsection
+@push('script')
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#payment-form').validate({
+                rules: {
+                    number_of_tickets: {
+                        required: true            
+                    },
+                    payment_method: {
+                        required: true
+                    },
+                },
+                messages: {
+            
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("name") == "number_of_tickets") {
+                        error.insertAfter(".error_number_of_tickets");
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                submitHandler: function(form) {
+                    // Check if user is Login or Not
+                    @if (!auth()->check())
+                        window.location.href = "{{ route('login') }}"; 
+                        return; 
+                    @endif
+
+                    let formData = $(form).serialize();
+
+                    $.ajax({
+                        url: "{{ url('events/ticket/payment') }}",
+                        method: 'POST',
+                        data: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        success: function(data) {
+                            if (data.order_id) {
+                                var options = {
+                                    key: data.razorpay_key,
+                                    amount: data.amount,
+                                    currency: 'INR',
+                                    name: data.name,
+                                    description: 'Event Payment',
+                                    image: '',
+                                    order_id: data.order_id,
+                                    handler: function (response) {
+                                        window.location.href = "{{ route('event_ticket_razorpay_success') }}?razorpay_order_id=" + response.razorpay_order_id + "&razorpay_payment_id=" + response.razorpay_payment_id + "&razorpay_signature=" + response.razorpay_signature;
+                                    },
+                                    prefill: {
+                                        name: data.name,
+                                        email: data.email,
+                                        contact: '' 
+                                    },
+                                    notes: {},
+                                    theme: {
+                                        color: '#F37254' 
+                                    }
+                                };
+                                var rzp1 = new Razorpay(options);
+                                rzp1.open();
+                            } else {
+                                alert('Error: ' + data.error);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                }
+            });
+
+            $('.pay-now').on('click', function() {
+                $('#payment-form').submit(); 
+            });
+    
+        });
+    </script>
+
+@endpush

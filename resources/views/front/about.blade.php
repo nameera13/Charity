@@ -2,7 +2,7 @@
 @section('title','About Us')
 @section('front')
 
-<div class="page-top" style="background-image: url('{{ asset('front/uploads/banner.jpg') }}')">
+<div class="page-top" style="background-image: url('{{ asset('uploads/setting/'.$global_setting_data->banner) }}')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="right-side" style="background-image: url({{ asset('admin/uploads/specials/'.$special->photo) }});">
+                                <div class="right-side" style="background-image: url({{ asset('uploads/specials/'.$special->photo) }});">
                                     <a class="video-button" href="{{ $special->video }}" target="_blank" rel="noopener noreferrer">
                                         <span></span>
                                     </a>
@@ -54,8 +54,8 @@
     </div>
 @endif
 
-@if($feature_section_items->status == 'show')
-    <div class="why-choose pt_70" style="background-image: url({{ asset('admin/uploads/feature-item/'.$feature_section_items->photo) }})">
+@if($home_page_item->feature_status == 'show')
+    <div class="why-choose pt_70" style="background-image: url({{ asset('uploads/home-page-item/'.$home_page_item->feature_background) }})">
         <div class="container">
             <div class="row">
                 @foreach ($features as $key => $value)                    

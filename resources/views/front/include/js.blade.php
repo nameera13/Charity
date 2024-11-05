@@ -10,3 +10,5 @@
 <script src="{{ asset('front/js/counterup.min.js') }}"></script>
 <script src="{{ asset('front/js/multi-countdown.js') }}"></script>
 <script src="{{ asset('front/js/jquery.meanmenu.js') }}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>

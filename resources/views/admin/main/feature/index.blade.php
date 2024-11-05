@@ -20,7 +20,7 @@
                             <div class="form-group mb-3">
                                 <label for="">Existing Photo</label>
                                 <div class="">
-                                    <img src="{{ asset('admin/uploads/feature-item/'.$feature_section_items->photo) }}" alt="" style="width:100%;" class="w_200">
+                                    <img src="{{ asset('uploads/feature-item/'.$feature_section_items->photo) }}" alt="" style="width:100%;" class="w_200">
                                 </div>
                             </div>
                             <div class="form-group mb-3">

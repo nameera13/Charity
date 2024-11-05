@@ -1,7 +1,7 @@
 @extends('front.layout.default')
 @Section('title','Event')
 @section('front')
-<div class="page-top" style="background-image: url('{{ asset('front/uploads/banner.jpg') }}')">
+<div class="page-top" style="background-image: url('{{ asset('uploads/setting/'.$global_setting_data->banner) }}')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -23,11 +23,11 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="item pb_70">
                         <div class="photo">
-                            <img src="{{ asset('admin/uploads/events/'.$value->featured_photo) }}" alt="">
+                            <img src="{{ asset('uploads/events/'.$value->featured_photo) }}" alt="">
                         </div>
                         <div class="text">
-                            <h2>
-                                <a href="event.html">{{ $value->name }}r</a>
+                            <h2 class="text-truncate">
+                                {{ $value->name }}
                             </h2>
                             <div class="date-time">
                                 <i class="fas fa-calendar-alt"></i> 
@@ -37,8 +37,8 @@
                                 @endphp
                                 {{ $date }},{{ $time }}
                             </div>
-                            <div class="short-des">
-                                <p>
+                            <div class="short-des" style="height: 5em; overflow: hidden;">
+                                <p style="margin: 0; line-height: 1.5;">
                                     {!! $value->short_description !!}
                                 </p>
                             </div>

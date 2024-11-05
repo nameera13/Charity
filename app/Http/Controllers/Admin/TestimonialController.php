@@ -59,7 +59,7 @@ class TestimonialController extends Controller
         $data->designation = $request->designation;
         $data->comment = $request->comment;
         $fileName = time().'.'.$request->photo->extension();
-        $request->photo->move(public_path('admin/uploads/testimonials'),$fileName);
+        $request->photo->move(public_path('uploads/testimonials'),$fileName);
         $data->photo = $fileName;
         $data->save();
 
@@ -85,9 +85,9 @@ class TestimonialController extends Controller
         $result = $this->model->find($id);
 
         if($request->photo != null){
-            unlink(public_path('admin/uploads/testimonials/'.$result->photo));
+            unlink(public_path('uploads/testimonials/'.$result->photo));
             $fileName = time().'.'.$request->photo->extension();
-            $request->photo->move(public_path('admin/uploads/testimonials'),$fileName);
+            $request->photo->move(public_path('uploads/testimonials'),$fileName);
             $result->photo = $fileName;
 
         }
@@ -103,7 +103,7 @@ class TestimonialController extends Controller
     public function destroy($id)
     {
         $result = $this->model->find($id);
-        unlink(public_path('admin/uploads/testimonials/'.$result->photo));
+        unlink(public_path('uploads/testimonials/'.$result->photo));
         $result->delete();
 
         return redirect()->back()->with('success','Testimonials Deleted Successfully!');
@@ -118,12 +118,12 @@ class TestimonialController extends Controller
                 'photo' => 'image|mimes:jpg,jpeg,png|max:2048', 
             ]);
     
-            if (!empty($result->photo) && file_exists(public_path('admin/uploads/testimonial-item/'.$result->photo))) {
-                unlink(public_path('admin/uploads/testimonial-item/'.$result->photo));
+            if (!empty($result->photo) && file_exists(public_path('uploads/testimonial-item/'.$result->photo))) {
+                unlink(public_path('uploads/testimonial-item/'.$result->photo));
             }
     
             $final_name = time().'.'.$request->photo->extension();
-            $request->photo->move(public_path('admin/uploads/testimonial-item'), $final_name);
+            $request->photo->move(public_path('uploads/testimonial-item'), $final_name);
             $result->photo = $final_name; 
         }    
 

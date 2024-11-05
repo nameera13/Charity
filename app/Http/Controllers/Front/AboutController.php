@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Counter;
 use App\Models\Special;
 use App\Models\Feature;
-use App\Models\FeatureSectionItem;
+use App\Models\HomePageItem;
 
 class AboutController extends Controller
 {
@@ -16,8 +16,8 @@ class AboutController extends Controller
         $counters = Counter::where('id',1)->first();
         $special = Special::where('id', 1)->first(); 
         $features = Feature::get();
-        $feature_section_items = FeatureSectionItem::where('id', 1)->first();
+        $home_page_item = HomePageItem::where('id', 1)->first();
         
-        return view('front.about',compact('counters', 'special', 'features', 'feature_section_items'));
+        return view('front.about',compact('counters', 'special', 'features', 'home_page_item'));
     }
 }

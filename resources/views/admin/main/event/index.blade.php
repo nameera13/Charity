@@ -69,7 +69,7 @@
                         searchable: false,
                         render: function(data, type, row) {
 
-                            var photoUrl = data ? "{{ asset('admin/uploads/events') }}/" + data : "{{ asset('admin/uploads/no-img.png') }}";
+                            var photoUrl = data ? "{{ asset('uploads/events') }}/" + data : "{{ asset('uploads/no-img.png') }}";
                             return '<img src="' + photoUrl + '" alt="Photo" width="100" />';
                         }
                     },
@@ -102,6 +102,7 @@
                             <div class="d-flex flex-column">
                                 <a href="{{ $module_route }}/photo/${row.id}" class="btn btn-sm btn-info text-white mb_5">Photo Gallery</a>
                                 <a href="{{ $module_route }}/video/${row.id}" class="btn btn-sm btn-success mb_5">Video Gallery</a>
+                                <a href="{{ $module_route }}/tickets/${row.id}" class="btn btn-sm btn-warning mb_5">Tickets</a>
                             </div> `;
                         }
                     },

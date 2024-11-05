@@ -7,7 +7,7 @@
 
     <title>@yield('title')</title>
 
-    <link rel="icon" type="image/png" href="{{ asset('admin/uploads/no-img.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('uploads/no-img.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     @include('admin.include.css')

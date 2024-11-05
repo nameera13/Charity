@@ -5,7 +5,7 @@
             <div class="form-group mb-3">
                 <label>Photo</label>
                 <div class="">
-                    <img id="volunteer_photo" src="{{ isset($result) ? asset('admin/uploads/volunteers/'.$result->photo) : '' }}" alt="" class="img-fluid {{ isset($result->photo) ? '' : 'd-none' }}" style="width: 240px; height: 180px;">
+                    <img id="volunteer_photo" src="{{ isset($result) ? asset('uploads/volunteers/'.$result->photo) : '' }}" alt="" class="img-fluid {{ isset($result->photo) ? '' : 'd-none' }}" style="width: 240px; height: 180px;">
                 </div>
                 <input type="file" class="form-control mb-2" name="photo" id="photo" onchange="Image()">
                 <span class="text-danger">

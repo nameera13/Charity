@@ -58,7 +58,7 @@ class SliderController extends Controller
         $data->btn_text = $request->btn_text;
         $data->btn_link = $request->btn_link;
         $fileName = time().'.'.$request->photo->extension();
-        $request->photo->move(public_path('admin/uploads/sliders'),$fileName);
+        $request->photo->move(public_path('uploads/sliders'),$fileName);
         $data->photo = $fileName;
         $data->save();
 
@@ -84,9 +84,9 @@ class SliderController extends Controller
         $result = $this->model->find($id);
 
         if($request->photo != null){
-            unlink(public_path('admin/uploads/sliders/'.$result->photo));
+            unlink(public_path('uploads/sliders/'.$result->photo));
             $fileName = time().'.'.$request->photo->extension();
-            $request->photo->move(public_path('admin/uploads/sliders'),$fileName);
+            $request->photo->move(public_path('uploads/sliders'),$fileName);
             $result->photo = $fileName;
 
         }
@@ -103,7 +103,7 @@ class SliderController extends Controller
     public function destroy($id)
     {
         $result = $this->model->find($id);
-        unlink(public_path('admin/uploads/sliders/'.$result->photo));
+        unlink(public_path('uploads/sliders/'.$result->photo));
         $result->delete();
 
         return redirect()->back()->with('success','Slider Deleted Successfully!');

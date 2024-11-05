@@ -2,7 +2,7 @@
 @section('title','Photo Gallery')
 @section('front')
 
-<div class="page-top" style="background-image: url('{{ asset('front/uploads/banner.jpg') }}')">
+<div class="page-top" style="background-image: url('{{ asset('uploads/setting/'.$global_setting_data->banner) }}')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -30,8 +30,8 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="photo-gallery-item mb_25">
                             <div class="photo-gallery-item-bg"></div>
-                            <a href="{{ asset('admin/uploads/photos/'.$value->photo) }}" class="magnific" title="Photo Caption">
-                                <img src="{{ asset('admin/uploads/photos/'.$value->photo) }}">
+                            <a href="{{ asset('uploads/photos/'.$value->photo) }}" class="magnific" title="Photo Caption">
+                                <img src="{{ asset('uploads/photos/'.$value->photo) }}">
                                 <div class="plus-icon"><i class="fas fa-search-plus"></i></div>
                             </a>
                         </div>

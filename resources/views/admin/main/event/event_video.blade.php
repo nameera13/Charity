@@ -97,7 +97,7 @@
                     },
                     { 
                         data: 'created_at', 
-                        name: 'event_photos.created_at'
+                        name: 'event_videos.created_at'
                     },
                     {
                         data: null,

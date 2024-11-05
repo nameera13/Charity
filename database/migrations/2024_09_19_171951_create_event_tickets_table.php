@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('unit_price');
             $table->integer('number_of_tickets');
             $table->integer('total_price');
+            $table->string('currency');
             $table->string('payment_id');
             $table->string('payment_method');
             $table->string('payment_status');

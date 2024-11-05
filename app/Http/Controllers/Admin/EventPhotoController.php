@@ -45,7 +45,7 @@ class EventPhotoController extends Controller
         $data->event_id = $request->event_id;
 
         $fileName = time().'.'.$request->photo->extension();
-        $request->photo->move(public_path('admin/uploads/event-photo'),$fileName);
+        $request->photo->move(public_path('uploads/event-photo'),$fileName);
         $data->photo = $fileName;
 
         $data->save();
@@ -75,7 +75,7 @@ class EventPhotoController extends Controller
     public function destroy(string $id)
     {
         $result = $this->model->find($id);
-        unlink(public_path('admin/uploads/event-photo/'.$result->photo));
+        unlink(public_path('uploads/event-photo/'.$result->photo));
         $result->delete();
 
         return redirect()->back()->with('success','Event Photo Deleted Successfully!');

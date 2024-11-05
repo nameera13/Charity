@@ -2,7 +2,7 @@
 @section('title','Volunteers')
 @section('front')
 
-<div class="page-top" style="background-image: url('{{ asset('front/uploads/banner.jpg') }}')">
+<div class="page-top" style="background-image: url('{{ asset('uploads/setting/'.$global_setting_data->banner) }}')">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="photo">
-                    <img src="{{ asset('admin/uploads/volunteers/'.$volunteer_details->photo) }}" alt="">
+                    <img src="{{ asset('uploads/volunteers/'.$volunteer_details->photo) }}" alt="">
                 </div>
             </div>
             <div class="col-md-9">

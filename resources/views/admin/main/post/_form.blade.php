@@ -67,7 +67,7 @@
             <label>Photo</label>
             <input type="file" class="form-control mb-2" name="photo" id="photo" onchange="Image()">
 
-            <img id="photos" src="{{ isset($result) ? asset('admin/uploads/posts/'.$result->photo) : '' }}" alt="" class="img-fluid {{ isset($result->photo) ? '' : 'd-none' }}" style="width: 240px; height: 140px;">
+            <img id="photos" src="{{ isset($result) ? asset('uploads/posts/'.$result->photo) : '' }}" alt="" class="img-fluid {{ isset($result->photo) ? '' : 'd-none' }}" style="width: 240px; height: 140px;">
 
             <span class="text-danger">
                 <div class="error_photo"></div>
@@ -87,6 +87,22 @@
         </div>
     </div>
 </div>
+
+
+@if(!isset($result) || !$result)
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group mb-3">
+            <label>Send Email to Subscribers?</label>
+            <select name="email_send" class="form-select">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+        </div>
+    </div>
+</div>
+@endif
+
 
 @push('scripts')
 <script>
@@ -143,6 +159,7 @@
                 },
                 short_description: {
                     required: true,
+                    maxlength: 120
                 },
                 description: {
                     required: true,

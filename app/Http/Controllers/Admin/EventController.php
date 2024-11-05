@@ -75,7 +75,7 @@ class EventController extends Controller
 
 
         $fileName = time().'.'.$request->featured_photo->extension();
-        $request->featured_photo->move(public_path('admin/uploads/events'),$fileName);
+        $request->featured_photo->move(public_path('uploads/events'),$fileName);
         $data->featured_photo = $fileName;
 
         $data->save();
@@ -103,9 +103,9 @@ class EventController extends Controller
         $result = $this->model->find($id);
 
         if($request->featured_photo != null){
-            unlink(public_path('admin/uploads/events/'.$result->featured_photo));
+            unlink(public_path('uploads/events/'.$result->featured_photo));
             $fileName = time().'.'.$request->featured_photo->extension();
-            $request->featured_photo->move(public_path('admin/uploads/events'),$fileName);
+            $request->featured_photo->move(public_path('uploads/events'),$fileName);
             $result->featured_photo = $fileName;
 
         }
@@ -129,7 +129,7 @@ class EventController extends Controller
     public function destroy($id)
     {
         $result = $this->model->find($id);
-        unlink(public_path('admin/uploads/events/'.$result->featured_photo));
+        unlink(public_path('uploads/events/'.$result->featured_photo));
         $result->delete();
 
         return redirect()->back()->with('success','Event Deleted Successfully!');

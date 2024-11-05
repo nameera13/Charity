@@ -36,7 +36,7 @@
             <label>Photo</label>
             <input type="file" class="form-control mb-2" name="photo" id="photo" onchange="sliderImage()">
 
-            <img id="slider_photo" src="{{ isset($result) ? asset('admin/uploads/sliders/'.$result->photo) : '' }}" alt="" class="img-fluid {{ isset($result->photo) ? '' : 'd-none' }}" style="width: 240px; height: 140px;">
+            <img id="slider_photo" src="{{ isset($result) ? asset('uploads/sliders/'.$result->photo) : '' }}" alt="" class="img-fluid {{ isset($result->photo) ? '' : 'd-none' }}" style="width: 240px; height: 140px;">
 
             <span class="text-danger">
                 <div class="error_photo"></div>

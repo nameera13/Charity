@@ -103,12 +103,12 @@ class FeatureController extends Controller
                 'photo' => 'image|mimes:jpg,jpeg,png|max:2048', 
             ]);
     
-            if (!empty($result->photo) && file_exists(public_path('admin/uploads/feature-item/'.$result->photo))) {
-                unlink(public_path('admin/uploads/feature-item/'.$result->photo));
+            if (!empty($result->photo) && file_exists(public_path('uploads/feature-item/'.$result->photo))) {
+                unlink(public_path('uploads/feature-item/'.$result->photo));
             }
     
             $final_name = time().'.'.$request->photo->extension();
-            $request->photo->move(public_path('admin/uploads/feature-item'), $final_name);
+            $request->photo->move(public_path('uploads/feature-item'), $final_name);
             $result->photo = $final_name; 
         }    
 

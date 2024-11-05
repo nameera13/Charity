@@ -7,13 +7,32 @@ use Illuminate\Http\Request;
 use Hash;
 use Auth;
 use App\Models\Admin;
+use App\Models\Cause;
+use App\Models\Event;
+use App\Models\Testimonial;
+use App\Models\User;
+use App\Models\Volunteer;
+use App\Models\Subscriber;
+use App\Models\Post;
+use App\Models\Photo;
+use App\Models\Video;
 use App\Mail\WebsiteEmail;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
-        return view('admin.main.home.dashboard');
+        $total_causes = Cause::count();
+        $total_events = Event::count();
+        $total_testimonials = Testimonial::count();
+        $total_users = User::count();
+        $total_volunteers = Volunteer::count();
+        $total_subscribers = Subscriber::count();
+        $total_posts = Post::count();
+        $total_photos = Photo::count();
+        $total_videos = Video::count();
+
+        return view('admin.main.home.dashboard', compact('total_causes', 'total_events', 'total_testimonials', 'total_users', 'total_volunteers', 'total_subscribers', 'total_posts', 'total_photos', 'total_videos'));
     }
 
     public function login()
@@ -127,11 +146,11 @@ class AdminController extends Controller
             ]);    
 
             if (Auth::guard('admin')->user()->photo != null) {
-                unlink(public_path('admin/uploads/profile/'.Auth::guard('admin')->user()->photo));
+                unlink(public_path('uploads/profile/'.Auth::guard('admin')->user()->photo));
             }
 
             $final_name = time().'.'.$request->photo->extension();
-            $request->photo->move(public_path('admin/uploads/profile'), $final_name);
+            $request->photo->move(public_path('uploads/profile'), $final_name);
             $data->photo = $final_name;
 
         } 

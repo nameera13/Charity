@@ -64,7 +64,7 @@
                         searchable: false,
                         render: function(data, type, row) {
 
-                            var photoUrl = data ? "{{ asset('admin/uploads/photos') }}/" + data : "{{ asset('admin/uploads/no-img.png') }}";
+                            var photoUrl = data ? "{{ asset('uploads/photos') }}/" + data : "{{ asset('uploads/no-img.png') }}";
                             return '<img src="' + photoUrl + '" alt="Photo" width="100" />';
                         }
                     },

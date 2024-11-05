@@ -5,10 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>@yield('title')</title>
 
-        <link rel="icon" type="image/png" href="{{ asset('front/uploads/favicon.png') }}">
+        <link rel="icon" type="image/png" href="{{ asset('uploads/setting/'.$global_setting_data->favicon) }}">
 
         <!-- All CSS -->
         @include('front.include.css')
+
+        @stack('styles')        
+
         <!-- All Javascripts -->
         @include('front.include.js')
         

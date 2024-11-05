@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Comment;
+use App\Models\Subscriber;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\View;
+use App\Mail\WebsiteEmail;
 
 class PostController extends Controller
 {
@@ -70,7 +72,7 @@ class PostController extends Controller
         }
 
         $fileName = time().'.'.$request->photo->extension();
-        $request->photo->move(public_path('admin/uploads/posts'),$fileName);
+        $request->photo->move(public_path('uploads/posts'),$fileName);
         $data->photo = $fileName;
 
         $data->post_category_id = $request->post_category_id;
@@ -81,6 +83,24 @@ class PostController extends Controller
         $data->tags = $tags;
 
         $data->save();
+
+        $last_id = $data->id;
+
+        $post_data = Post::where('id', $last_id)->first();
+
+        if ($request->email_send == 1) {
+
+            $subscribers = Subscriber::where('status',1)->get();
+
+            $subject = "New Post Published";
+            $message = "New Post has been published. Please visit our website to read the post.<br>";
+            $message .= '<a href="'.url('blog',$post_data->slug).'">Click Here to read the Post</a>';
+
+            foreach ($subscribers as $key => $value) {
+                \Mail::to($value->email)->send(new WebsiteEmail($subject, $message));
+            }
+
+        }
 
         return redirect($this->moduleRoute)->with('success','Post Created Successfully!');
     }
@@ -112,9 +132,9 @@ class PostController extends Controller
         }
 
         if($request->photo != null){
-            unlink(public_path('admin/uploads/posts/'.$result->photo));
+            unlink(public_path('uploads/posts/'.$result->photo));
             $fileName = time().'.'.$request->photo->extension();
-            $request->photo->move(public_path('admin/uploads/posts'),$fileName);
+            $request->photo->move(public_path('uploads/posts'),$fileName);
             $result->photo = $fileName;
 
         }
@@ -134,7 +154,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $result = $this->model->find($id);
-        unlink(public_path('admin/uploads/posts/'.$result->photo));
+        unlink(public_path('uploads/posts/'.$result->photo));
         $result->delete();
 
         return redirect()->back()->with('success','Post Deleted Successfully!');

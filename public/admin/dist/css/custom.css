@@ -18,6 +18,10 @@ body {
     position: static;
 }
 
+.d-block {
+    display: block;
+}
+
 table.t1 tr td {
     border-top: 1px solid #e3e3e3;
 }

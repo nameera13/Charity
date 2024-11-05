@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="right-side" style="background-image: url({{ asset('admin/uploads/specials/'.$special->photo) }});">
+                                    <div class="right-side" style="background-image: url({{ asset('uploads/specials/'.$special->photo) }});">
                                         <a class="video-button" href="{{ $special->video }}" target="_blank" rel="noopener noreferrer">
                                             <span></span>
                                         </a>
@@ -40,335 +40,235 @@
         </div>
     @endif
 
+    @if($home_page_item->cause_status == 'show')
     <div class="cause pt_70">
         <div class="container">
+            @if ($home_page_item->cause_heading != '' || $home_page_item->cause_subheading != '')                
             <div class="row">
                 <div class="col-md-12">
                     <div class="heading">
-                        <h2>Featured Causes</h2>
+                        <h2>{{ $home_page_item->cause_heading }}</h2>
                         <p>
-                            Our organization focuses on providing services to the homeless peoples.
+                            {{ $home_page_item->cause_subheading }}
                         </p>
                     </div>
                 </div>
             </div>
+            @endif
+
             <div class="row">
+                @foreach ($featured_causes as $value)                    
                 <div class="col-lg-4 col-md-6">
                     <div class="item pb_70">
                         <div class="photo">
-                            <img src="uploads/cause-1.jpg" alt="">
+                            <img src="{{ asset('uploads/causes/'.$value->featured_photo) }}" alt="">
                         </div>
                         <div class="text">
                             <h2>
-                                <a href="cause.html">Child Support</a>
+                                <a href="{{ url('causes/'.$value->slug) }}">{{ $value->name }}</a>
                             </h2>
                             <div class="short-des">
                                 <p>
-                                    To provide food, shelter, clothing, education and medical assistance to homeless children and their families.
+                                    {!! $value->short_description !!}
                                 </p>
                             </div>
+                            @php
+                                $percentage = ($value->raised / $value->goal) * 100;
+                                $percentage = ceil($percentage);
+                            @endphp
                             <div class="progress mb_10">
-                                <div class="progress-bar w-0" role="progressbar" aria-label="Example with label" aria-valuenow="70" aria-valuemin="0" aria-valuemax="70" style="animation: progressAnimation1 2s linear forwards;"></div>
+                                <div class="progress-bar w-0" role="progressbar" aria-label="Example with label"
+                                    aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100" 
+                                    style="animation: progressAnimation{{ $loop->iteration }} 2s linear forwards;"></div>
                                 <style>
-                                    @keyframes progressAnimation1 {from {width: 0;}to {width: 70%;}}
+                                    @keyframes progressAnimation{{ $loop->iteration }} {
+                                        from {
+                                            width: 0;
+                                        }to {
+                                            width: {{ $percentage }}%;
+                                        }
+                                    }
                                 </style>
                             </div>
                             <div class="lbl mb_20">
-                                <div class="goal">Goal: $4000</div>
-                                <div class="raised">Raised: $3500</div>
+                                <div class="goal">Goal: ₹{{ $value->goal }}</div>
+                                <div class="raised">Raised: ₹{{ $value->raised }}</div>
                             </div>
                             <div class="button-style-2">
-                                <a href="cause.html">Donate Now <i class="fas fa-long-arrow-alt-right"></i></a>
+                                <a href="{{ url('causes/'.$value->slug) }}">Donate Now <i class="fas fa-long-arrow-alt-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="item pb_70">
-                        <div class="photo">
-                            <img src="uploads/cause-2.jpg" alt="">
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="cause.html">Help to Mothers</a>
-                            </h2>
-                            <div class="short-des">
-                                <p>
-                                    To help the mothers who are homeless & helpless, we provide them food, shelter & medical assistance.
-                                </p>
-                            </div>
-                            <div class="progress mb_10">
-                                <div class="progress-bar w-0" role="progressbar" aria-label="Example with label" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="animation: progressAnimation2 2s linear forwards;"></div>
-                                <style>
-                                    @keyframes progressAnimation2 {from {width: 0;}to {width: 90%;}}
-                                </style>
-                            </div>
-                            <div class="lbl mb_20">
-                                <div class="goal">Goal: $5000</div>
-                                <div class="raised">Raised: $4500</div>
-                            </div>
-                            <div class="button-style-2">
-                                <a href="cause.html">Donate Now <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="item pb_70">
-                        <div class="photo">
-                            <img src="uploads/cause-3.jpg" alt="">
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="cause.html">Water for All</a>
-                            </h2>
-                            <div class="short-des">
-                                <p>
-                                    To provide clean water to the homeless peoples, we have taken a project to provide them clean water.
-                                </p>
-                            </div>
-                            <div class="progress mb_10">
-                                <div class="progress-bar w-0" role="progressbar" aria-label="Example with label" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="animation: progressAnimation3 2s linear forwards;"></div>
-                                <style>
-                                    @keyframes progressAnimation3 {from {width: 0;}to {width: 30%;}}
-                                </style>
-                            </div>
-                            <div class="lbl mb_20">
-                                <div class="goal">Goal: $3000</div>
-                                <div class="raised">Raised: $1000</div>
-                            </div>
-                            <div class="button-style-2">
-                                <a href="cause.html">Donate Now <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
+    @endif
 
 
-    @if($feature_section_items->status == 'show')
-        <div class="why-choose pt_70" style="background-image: url({{ asset('admin/uploads/feature-item/'.$feature_section_items->photo) }})">
-            <div class="container">
-                <div class="row">
-                    @foreach ($features as $key => $value)                    
-                    <div class="col-md-4">
-                        <div class="inner pb_70">
-                            <div class="icon">
-                                <i class="{{ $value->icon }}"></i>
-                            </div>
-                            <div class="text">
-                                <h2>{{ $value->heading }}</h2>
-                                <p>
-                                    {!! $value->text !!}
-                                </p>
-                            </div>
+    @if($home_page_item->feature_status == 'show')
+    <div class="why-choose pt_70" style="background-image: url({{ asset('uploads/home-page-item/'.$home_page_item->feature_background) }})">
+        <div class="container">
+            <div class="row">
+                @foreach ($features as $key => $value)                    
+                <div class="col-md-4">
+                    <div class="inner pb_70">
+                        <div class="icon">
+                            <i class="{{ $value->icon }}"></i>
+                        </div>
+                        <div class="text">
+                            <h2>{{ $value->heading }}</h2>
+                            <p>
+                                {!! $value->text !!}
+                            </p>
                         </div>
                     </div>
-                    @endforeach
                 </div>
+                @endforeach
             </div>
         </div>
+    </div>
     @endif
 
     
+    @if($home_page_item->event_status == 'show')
     <div class="event pt_70">
         <div class="container">
+            @if ($home_page_item->event_heading != '' || $home_page_item->event_subheading != '')                
             <div class="row">
                 <div class="col-md-12">
                     <div class="heading">
-                        <h2>Upcoming Events</h2>
+                        <h2>{{ $home_page_item->event_heading }}</h2>
                         <p>
-                            You can organize events and help us to raise fund for the poor people.
+                            {{ $home_page_item->event_subheading }}
                         </p>
                     </div>
                 </div>
             </div>
+            @endif
             <div class="row">
+                @foreach ($events as $value)  
+                @php
+                    $current_timestamp = strtotime(date('Y-m-d H:i'));
+                    $event_timestamp = strtotime($value->date.' '.$value->time);
+                @endphp
+
+                @if ($event_timestamp < $current_timestamp)
+                @continue  
+                @endif
+
                 <div class="col-lg-4 col-md-6">
                     <div class="item pb_70">
                         <div class="photo">
-                            <img src="uploads/event-1.jpg" alt="">
+                            <img src="{{ asset('uploads/events/'.$value->featured_photo) }}" alt="">
                         </div>
                         <div class="text">
                             <h2>
-                                <a href="event.html">Abled child cancer</a>
+                                <a href="{{ url('events/'.$value->slug) }}">{{ $value->name }}</a>
                             </h2>
                             <div class="date-time">
-                                <i class="fas fa-calendar-alt"></i> 23 Sep 2023, 09:30 AM
+                                <i class="fas fa-calendar-alt"></i> 
+                                @php
+                                    $date = \Carbon\Carbon::parse($value->date)->format('j M, Y');
+                                    $time = \Carbon\Carbon::parse($value->time)->format('h:i A');
+                                @endphp
+                                {{ $date }},{{ $time }}
                             </div>
                             <div class="short-des">
                                 <p>
-                                    To provide food, shelter, clothing, education and medical assistance to homeless children and their families.
+                                    {!! $value->short_description !!}
                                 </p>
                             </div>
                             <div class="button-style-2">
-                                <a href="event.html">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
+                                <a href="{{ url('events/'.$value->slug) }}">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="item pb_70">
-                        <div class="photo">
-                            <img src="uploads/event-2.jpg" alt="">
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="event.html">Contribute for Recovery</a>
-                            </h2>
-                            <div class="date-time">
-                                <i class="fas fa-calendar-alt"></i> 23 Sep 2023, 09:30 AM
-                            </div>
-                            <div class="short-des">
-                                <p>
-                                    To help the mothers who are homeless & helpless, we provide them food, shelter & medical assistance.
-                                </p>
-                            </div>
-                            <div class="button-style-2">
-                                <a href="event.html">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="item pb_70">
-                        <div class="photo">
-                            <img src="uploads/event-3.jpg" alt="">
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="event.html">Playing For World</a>
-                            </h2>
-                            <div class="date-time">
-                                <i class="fas fa-calendar-alt"></i> 23 Sep 2023, 09:30 AM
-                            </div>
-                            <div class="short-des">
-                                <p>
-                                    To provide clean water to the homeless peoples, we have taken a project to provide them clean water.
-                                </p>
-                            </div>
-                            <div class="button-style-2">
-                                <a href="event.html">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
-
-    @if($testimonial_section_items->status == 'show')
-        <div class="testimonial pt_70 pb_70" style="background-image: url({{ asset('admin/uploads/testimonial-item/'.$testimonial_section_items->photo) }})">
-            <div class="bg"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="main-header">{{ $testimonial_section_items->heading }}</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="testimonial-carousel owl-carousel">
-                            @foreach ($testimonials as $key => $value)
-                                <div class="item">
-                                    <div class="photo">
-                                        <img src="{{ asset('admin/uploads/testimonials/'.$value->photo) }}" alt="" />
-                                    </div>
-                                    <div class="text">
-                                        <h4>{{ $value->name }}</h4>
-                                        <p>{{ $value->designation }}</p>
-                                    </div>
-                                    <div class="description">
-                                        <p>
-                                            {!! $value->comment !!}
-                                        </p>
-                                    </div>
-                                </div>                            
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     @endif
 
-    <div class="blog pt_70">
+    @if($home_page_item->testimonial_status == 'show')
+    <div class="testimonial pt_70 pb_70" style="background-image: url({{ asset('uploads/home-page-item/'.$home_page_item->testimonial_background) }})">
+        <div class="bg"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="heading">
-                        <h2>Latest News</h2>
-                        <p>
-                            Check out the latest news and updates from our blog post
-                        </p>
-                    </div>
+                    <h2 class="main-header">{{ $home_page_item->heading }}</h2>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="item pb_70">
-                        <div class="photo">
-                            <img src="uploads/blog-1.jpg" alt="" />
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="post.html">Partnering to create a strong community</a>
-                            </h2>
-                            <div class="short-des">
-                                <p>
-                                    In order to create a good community we need to work together. We need to help, support each other and be respectful to each other.
-                                </p>
-                            </div>
-                            <div class="button-style-2 mt_20">
-                                <a href="post.html">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="item pb_70">
-                        <div class="photo">
-                            <img src="uploads/blog-2.jpg" alt="" />
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="post.html">Turning your emergency donation into instant aid</a>
-                            </h2>
-                            <div class="short-des">
-                                <p>
-                                    We are working hard to help the poor people. We are trying to provide them food, shelter, clothing, education and medical assistance.
-                                </p>
-                            </div>
-                            <div class="button-style-2 mt_20">
-                                <a href="post.html">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="item pb_70">
-                        <div class="photo">
-                            <img src="uploads/blog-3.jpg" alt="" />
-                        </div>
-                        <div class="text">
-                            <h2>
-                                <a href="post.html">Charity provides educational boost for children</a>
-                            </h2>
-                            <div class="short-des">
-                                <p>
-                                    In order boost the education of the children, we are providing them books, pens, pencils, notebooks and other necessary things.
-                                </p>
-                            </div>
-                            <div class="button-style-2 mt_20">
-                                <a href="post.html">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
-                            </div>
-                        </div>
+                <div class="col-12">
+                    <div class="testimonial-carousel owl-carousel">
+                        @foreach ($testimonials as $key => $value)
+                            <div class="item">
+                                <div class="photo">
+                                    <img src="{{ asset('uploads/testimonials/'.$value->photo) }}" alt="" />
+                                </div>
+                                <div class="text">
+                                    <h4>{{ $value->name }}</h4>
+                                    <p>{{ $value->designation }}</p>
+                                </div>
+                                <div class="description">
+                                    <p>
+                                        {!! $value->comment !!}
+                                    </p>
+                                </div>
+                            </div>                            
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @endif
+
+    @if($home_page_item->blog_status == 'show')
+    <div class="blog pt_70">
+        <div class="container">
+            @if ($home_page_item->blog_heading != '' || $home_page_item->blog_subheading != '')      
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading">
+                        <h2>{{ $home_page_item->blog_heading }}</h2>
+                        <p>
+                            {{ $home_page_item->blog_subheading }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            @endif
+            <div class="row">
+                @foreach ($posts as $value)                    
+                <div class="col-lg-4 col-md-6">
+                    <div class="item pb_70">
+                        <div class="photo">
+                            <img src="{{ asset('uploads/posts/'.$value->photo) }}" alt="" />
+                        </div>
+                        <div class="text">
+                            <h2>
+                                <a href="{{ url('blog/'.$value->slug) }}">{{ $value->title }}</a>
+                            </h2>
+                            <div class="short-des">
+                                <p>
+                                    {{ $value->short_description }}
+                                </p>
+                            </div>
+                            <div class="button-style-2 mt_20">
+                                <a href="{{ url('blog/'.$value->slug) }}">Read More <i class="fas fa-long-arrow-alt-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    @endif
+
 
 @endsection
